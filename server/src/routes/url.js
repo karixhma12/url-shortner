@@ -25,4 +25,14 @@ urlrouter.post("/shorten",authMiddleware,async function (req,res){
 
 })
 
+
+urlrouter.get("/my-urls",authMiddleware,async function(req,res){
+    const userId = req.user.id;
+    const shortCodes = await Url.find({
+        userId : userId
+    })
+
+    res.status(200).json({shortCodes});
+})
+
 module.exports = urlrouter;
