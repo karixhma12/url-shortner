@@ -7,7 +7,6 @@ const router = require("./routes/auth");
 
 dotenv.config();
 connectToDatabase();
-
 const app = express();
 
 app.use(express.json());
