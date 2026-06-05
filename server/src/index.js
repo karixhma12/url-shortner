@@ -14,6 +14,21 @@ app.use(express.json());
 app.use("/api/auth",router);
 app.use("/api/url",urlrouter);
 
+app.get("/:shortCode",async function(req,res){
+    const shortCode = req.params.shortCode ; 
+    const url = await Url.findOne({
+        shortCode : shortCode 
+    })
+
+    if(!url){
+        return res.status(404).json({message: "URL not found!"});
+    }
+
+    const URL = url.originalUrl; 
+
+    return res.redirect(URL);
+})
+
 app.get("/",(req,res)=>{
     res.json({message : "Server is running!"});
 })
