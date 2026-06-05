@@ -1,7 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const connectToDatabase = require("./db");
+const User = require("./models/User");
+const Url = require("./models/Url");
 
 dotenv.config();
+connectToDatabase();
 
 const app = express();
 
@@ -10,9 +14,6 @@ app.use(express.json());
 app.get("/",(req,res)=>{
     res.json({message : "Server is running!"});
 })
-
-
-
 
 
 app.listen(3000,()=>{
