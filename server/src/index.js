@@ -5,10 +5,15 @@ const User = require("./models/User");
 const Url = require("./models/Url");
 const router = require("./routes/auth");
 const urlrouter = require("./routes/url");
+const cors = require("cors");
 
 dotenv.config();
 connectToDatabase();
 const app = express();
+
+app.use(cors({
+    origin : process.env.CLIENT_URL
+}));
 
 app.use(express.json());
 app.use("/api/auth",router);
