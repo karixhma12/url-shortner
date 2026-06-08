@@ -1,17 +1,18 @@
 import {useState,useEffect,useContext,useRef} from "react";
-import { AuthContext } from "../context/AuthContext";
+import useAuth from "../hooks/useAuth";
 import axios from "axios";
 
 function Dashboard(){
     const inputRef = useRef("");
     const [shortCode,setShortCode] = useState("");
-    const {token} = useContext(AuthContext);
+    const {token} = useAuth();
 
     const [myUrls,setMyUrls] = useState([]);
 
     useEffect(()=>{
         async function fetchUrls(){
             const response = await axios.get("http://localhost:3000/api/url/my-urls",{headers:{Authorization:`Bearer ${token}`}});
+            console.log(response.data);
             setMyUrls(response.data.shortCodes);
         } 
         fetchUrls();

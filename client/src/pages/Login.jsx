@@ -1,13 +1,13 @@
 import { useContext,useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../context/AuthContext";
+import useAuth from "../hooks/useAuth";
 
 function Login(){
 
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
-    const {setToken} = useContext(AuthContext);
+    const {setToken} = useAuth();
     const navigate = useNavigate();
 
     async function loginfunc(){
