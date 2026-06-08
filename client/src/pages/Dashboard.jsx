@@ -11,7 +11,7 @@ function Dashboard(){
 
     useEffect(()=>{
         async function fetchUrls(){
-            const response = await axios.get("http://localhost:3000/api/url/my-urls",{headers:{Authorization:`Bearer ${token}`}});
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/url/my-urls`,{headers:{Authorization:`Bearer ${token}`}});
             console.log(response.data);
             setMyUrls(response.data.shortCodes);
         } 
@@ -19,7 +19,7 @@ function Dashboard(){
     },[])
 
     async function shortenUrl(){
-       const response = await axios.post("http://localhost:3000/api/url/shorten",{originalUrl : inputRef.current.value},{headers:{Authorization:`Bearer ${token}`}});
+       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/url/shorten`,{originalUrl : inputRef.current.value},{headers:{Authorization:`Bearer ${token}`}});
        setShortCode(response.data.shortCode);
     }
 
@@ -32,7 +32,7 @@ function Dashboard(){
                 {myUrls.map((url)=>{
                     return <div key={url._id}>
                         <span>{url.originalUrl}</span> →
-                        <a href={`http://localhost:3000/${url.shortCode}`}>{url.shortCode}</a>
+                        <a href={`${import.meta.env.VITE_API_URL}/${url.shortCode}`}>{url.shortCode}</a>
                     </div>
                 })}
             </div>

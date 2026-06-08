@@ -9,7 +9,7 @@ function Signup(){
     const navigate = useNavigate();
 
     async function signup(){
-        await axios.post("http://localhost:3000/api/auth/signup",{email:email,password:password});
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signup`,{email:email,password:password});
         navigate("/login");
     }
 
